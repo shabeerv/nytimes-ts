@@ -6,10 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import Button from "@mui/material/Button";
-import { logout } from "../../reducers/userReducer";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { Search, SearchIconWrapper, style, StyledInputBase } from "./styles";
 import en from "../../localization/en";
+import { logout } from "../../actions/userAction";
 
 export default function Navbar() {
   const dispatch = useAppDispatch();

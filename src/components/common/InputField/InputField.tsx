@@ -17,7 +17,6 @@ const InputForm: React.FC<IInputProp> = ({
   label,
   formik,
 }) => {
-  console.log(formik.errors[name]);
   return (
     <>
       {formik.errors[name] && formik.touched[name] ? (

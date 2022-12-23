@@ -59,7 +59,7 @@ export default function Register() {
     if (isSuccess) {
       navigate(nextRoute);
     }
-    //eslinit-disable-next-line
+    //eslint-disable-next-line
   }, [isSuccess]);
 
   return (

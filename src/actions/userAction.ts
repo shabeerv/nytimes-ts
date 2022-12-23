@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import UserController from "../controllers/UserController";
 
 export const actionTypes = {
@@ -39,3 +39,5 @@ export const register = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAction("user/logout");
