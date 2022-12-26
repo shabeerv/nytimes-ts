@@ -1,10 +1,5 @@
-import Avatar from "@mui/material/Avatar";
 import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import CustomButton from "../common/CustomButton";
 import { useFormik } from "formik";
 import { schema } from "../common/Validation";
@@ -14,12 +9,14 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { register, actionTypes as userActions } from "../../actions/userAction";
 import { successSelector } from "../../selectors/statusSelector";
 import { getLatestError } from "../../selectors/errorSelector";
-import { useNavigate, NavLink } from "react-router-dom";
-import { avatar, containerBox, formBox } from "./styles";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import en from "../../localization/en";
 import { Alert } from "@mui/material";
 import { reset } from "../../reducers/errorReducer";
+import AuthLayout from "../common/AuthLayout";
+import Link from "@mui/material/Link";
+import { styles } from "../common/AuthLayout/styles";
 
 const initialValues = {
   email: "",
@@ -42,6 +39,7 @@ export default function Register() {
   );
   const isError = useAppSelector(getLatestError);
   const nextRoute = "/";
+  const loginRoute = "/login";
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -63,53 +61,50 @@ export default function Register() {
   }, [isSuccess]);
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box sx={containerBox}>
-        <Avatar sx={avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={formik.handleSubmit}
-          noValidate
-          sx={formBox}
-        >
-          {Object.keys(initialValues).map((key, i) => {
-            const label = labels[key as keyof IValueProps];
+    <AuthLayout title={en.signUp} formik={formik}>
+      {Object.keys(initialValues).map((key, i) => {
+        const label = labels[key as keyof IValueProps];
 
-            return (
-              <React.Fragment key={key}>
-                <InputField
-                  key={key}
-                  name={key}
-                  placeholder={`Enter ${label}`}
-                  handleChange={formik.handleChange}
-                  label={label}
-                  formik={formik}
-                />
-              </React.Fragment>
-            );
-          })}
-          {isError && (
-            <Alert
-              severity="error"
-              onClose={() => {
-                dispatch(reset());
-              }}
-            >
-              {/*@ts-ignore*/}
-              {isError.message}
-            </Alert>
-          )}
-          <CustomButton text={en.signUp} />
-          <Grid container justifyContent="center" item>
-            <NavLink to="/login">{en.signinMessage}</NavLink>
-          </Grid>
-        </Box>
-      </Box>
-    </Container>
+        return (
+          <React.Fragment key={key}>
+            <InputField
+              key={key}
+              name={key}
+              placeholder={`Enter ${label}`}
+              handleChange={formik.handleChange}
+              label={label}
+              formik={formik}
+            />
+          </React.Fragment>
+        );
+      })}
+      {isError && (
+        <Alert
+          severity="error"
+          onClose={() => {
+            dispatch(reset());
+          }}
+        >
+          {/*@ts-ignore*/}
+          {isError.message}
+        </Alert>
+      )}
+      <CustomButton
+        text={en.signUp}
+        fullWidth={true}
+        variant="contained"
+        sx={styles.button}
+      />
+      <Grid container justifyContent="center" item>
+        <Link
+          href={loginRoute}
+          variant="body2"
+          onClick={() => dispatch(reset())}
+        >
+          {en.signinMessage}
+          {/* onClick={dispatch(reset())} */}
+        </Link>
+      </Grid>
+    </AuthLayout>
   );
 }

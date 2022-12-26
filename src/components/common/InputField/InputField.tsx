@@ -17,33 +17,22 @@ const InputForm: React.FC<IInputProp> = ({
   label,
   formik,
 }) => {
+  const isError = (formik.errors[name] && formik.touched[name]) as boolean;
+
   return (
     <>
-      {formik.errors[name] && formik.touched[name] ? (
-        <TextField
-          error
-          margin="normal"
-          fullWidth
-          id={name}
-          label={name}
-          placeholder={placeholder}
-          onChange={handleChange}
-          autoComplete="off"
-          helperText={formik.errors[name] as React.ReactNode}
-        />
-      ) : (
-        <TextField
-          margin="normal"
-          fullWidth
-          id={name}
-          type={name}
-          name={name}
-          label={label}
-          placeholder={placeholder}
-          onChange={handleChange}
-          autoComplete="off"
-        />
-      )}
+      <TextField
+        error={isError}
+        margin="normal"
+        fullWidth
+        type={name}
+        id={name}
+        label={name}
+        placeholder={placeholder}
+        onChange={handleChange}
+        autoComplete="off"
+        helperText={isError && (formik.errors[name] as React.ReactNode)}
+      />
     </>
 
     //   <div>

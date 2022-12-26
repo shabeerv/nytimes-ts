@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import statusReducer from "../reducers/statusReducer";
 import errorReducer from "../reducers/errorReducer";
+import newsReducer from "../reducers/newsReducer";
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,7 @@ const combinedReducer = combineReducers({
   user: userReducer,
   status: statusReducer,
   error: errorReducer,
+  news: newsReducer,
 });
 
 const rootReducer = (state: any, action: AnyAction) => {

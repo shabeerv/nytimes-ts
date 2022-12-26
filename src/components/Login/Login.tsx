@@ -1,10 +1,5 @@
-import Avatar from "@mui/material/Avatar";
 import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import CustomButton from "../common/CustomButton";
 import { useFormik } from "formik";
 import { schema } from "../common/Validation";
@@ -14,12 +9,15 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { login, actionTypes as userActions } from "../../actions/userAction";
 import { successSelector } from "../../selectors/statusSelector";
 import { getLatestError } from "../../selectors/errorSelector";
-import { useNavigate, NavLink } from "react-router-dom";
-import { avatar, containerBox, formBox } from "./styles";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { reset } from "../../reducers/errorReducer";
 import en from "../../localization/en";
 import { Alert } from "@mui/material";
+import AuthLayout from "../common/AuthLayout";
+import Link from "@mui/material/Link";
+import { getTopStories } from "../../actions/newsAction";
+import { styles } from "../common/AuthLayout/styles";
 
 const initialValues = {
   email: "",
@@ -41,8 +39,10 @@ export default function Login() {
   );
   const isError = useAppSelector(getLatestError);
   const nextRoute = "/";
+  const registerRoute = "/register";
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const section = "world";
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -51,6 +51,7 @@ export default function Login() {
       const email = values.email;
       const password = values.password;
       dispatch(login({ email, password }));
+      dispatch(getTopStories({ section }));
     },
   });
 
@@ -58,58 +59,51 @@ export default function Login() {
     if (isSuccess) {
       navigate(nextRoute);
     }
-    //eslinit-disable-next-line
+    //eslint-disable-next-line
   }, [isSuccess]);
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box sx={containerBox}>
-        <Avatar sx={avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {en.signIn}
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={formik.handleSubmit}
-          noValidate
-          sx={formBox}
+    <AuthLayout title={en.signIn} formik={formik}>
+      {Object.keys(initialValues).map((key, i) => {
+        const label = labels[key as keyof IValueProps];
+
+        return (
+          <React.Fragment key={key}>
+            <InputField
+              key={key}
+              name={key}
+              placeholder={`Enter ${label}`}
+              handleChange={formik.handleChange}
+              label={label}
+              formik={formik}
+            />
+          </React.Fragment>
+        );
+      })}
+      {isError && (
+        <Alert
+          severity="error"
+          onClose={() => {
+            dispatch(reset());
+          }}
         >
-          {Object.keys(initialValues).map((key, i) => {
-            const label = labels[key as keyof IValueProps];
+          {/*@ts-ignore*/}
+          {isError.message}
+        </Alert>
+      )}
 
-            return (
-              <React.Fragment key={key}>
-                <InputField
-                  key={key}
-                  name={key}
-                  placeholder={`Enter ${label}`}
-                  handleChange={formik.handleChange}
-                  label={label}
-                  formik={formik}
-                />
-              </React.Fragment>
-            );
-          })}
-          {isError && (
-            <Alert
-              severity="error"
-              onClose={() => {
-                dispatch(reset());
-              }}
-            >
-              {/*@ts-ignore*/}
-              {isError.message}
-            </Alert>
-          )}
-
-          <CustomButton text={en.signIn} />
-          <Grid container justifyContent="center" item>
-            <NavLink to="/register">{en.signupMessage}</NavLink>
-          </Grid>
-        </Box>
-      </Box>
-    </Container>
+      <CustomButton
+        text={en.signIn}
+        fullWidth={true}
+        variant="contained"
+        sx={styles.button}
+      />
+      <Grid container justifyContent="center" item>
+        <Link href={registerRoute} variant="body2">
+          {en.signupMessage}
+          {/* onClick={dispatch(reset())} */}
+        </Link>
+      </Grid>
+    </AuthLayout>
   );
 }

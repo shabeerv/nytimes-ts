@@ -3,13 +3,14 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
+import CustomButton from "../common/CustomButton";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { Search, SearchIconWrapper, style, StyledInputBase } from "./styles";
+import { style } from "./styles";
 import en from "../../localization/en";
 import { logout } from "../../actions/userAction";
+import SearchBox from "../SearchBox/SearchBox";
 
 export default function Navbar() {
   const dispatch = useAppDispatch();
@@ -31,20 +32,15 @@ export default function Navbar() {
           >
             <ArticleOutlinedIcon fontSize="large" />
           </IconButton>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder={en.searchPlaceholder}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <SearchBox />
           <Box sx={style.commonBox} />
 
-          <Button color="inherit" onClick={logoutClicked}>
-            {en.logout}
-          </Button>
+          <CustomButton
+            text={en.logout}
+            color="inherit"
+            onClick={logoutClicked}
+          />
+          {/* <Button color="inherit" onClick={logoutClicked}> */}
         </Toolbar>
       </AppBar>
     </Box>

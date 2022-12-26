@@ -7,6 +7,8 @@ const en = {
   signIn: "Sign In",
   signUp: "Sign Up",
   logout: "Logout",
+  aboutNY:
+    "The New York Times (NYT) is an American daily newspaper, founded and continuously published in New York City since September 18, 1851. It has won 112 Pulitzer Prizes, more than any other news organization.",
 };
 
 export default en;
