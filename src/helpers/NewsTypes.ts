@@ -1,10 +1,12 @@
 export interface INews {
-  data: [];
   section: string;
   title: string;
   abstract: string;
   byline: string;
-  //createdate
-  //multimedia
+  published_date: string;
+  multimedia: Array<{
+    url: string;
+  }>;
   url: string;
+  uri: string;
 }

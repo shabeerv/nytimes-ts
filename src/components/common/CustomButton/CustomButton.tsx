@@ -16,6 +16,7 @@ type Props = {
     | "info"
     | "warning"
     | undefined;
+  size?: "small" | "medium" | "large" | undefined;
 };
 
 const CustomButton: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const CustomButton: React.FC<Props> = ({
   variant,
   onClick,
   color,
+  size,
 }) => {
   fullWidth = fullWidth || false;
   return (
@@ -36,6 +38,7 @@ const CustomButton: React.FC<Props> = ({
         sx={sx}
         onClick={onClick}
         color={color}
+        size={size}
       >
         {text}
       </Button>

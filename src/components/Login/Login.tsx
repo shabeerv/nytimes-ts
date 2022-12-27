@@ -51,7 +51,7 @@ export default function Login() {
       const email = values.email;
       const password = values.password;
       dispatch(login({ email, password }));
-      dispatch(getTopStories({ section }));
+      // dispatch(getTopStories({ section }));
     },
   });
 

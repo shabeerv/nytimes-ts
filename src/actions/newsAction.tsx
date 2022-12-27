@@ -5,13 +5,11 @@ export const actionTypes = {
   GETTOPSTORIES: "news/GETTOPSTORIES",
 };
 
-type NewsProps = {
-  section: string;
-};
+type NewsProps = string;
 
 export const getTopStories = createAsyncThunk(
   actionTypes.GETTOPSTORIES,
-  async ({ section }: NewsProps, { rejectWithValue }) => {
+  async (section: NewsProps, { rejectWithValue }) => {
     try {
       const response = await NewsController.fetchTopStories(`${section}`);
       console.log("News: ", response);
