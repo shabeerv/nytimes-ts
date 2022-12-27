@@ -16,7 +16,6 @@ import en from "../../localization/en";
 import { Alert } from "@mui/material";
 import AuthLayout from "../common/AuthLayout";
 import Link from "@mui/material/Link";
-import { getTopStories } from "../../actions/newsAction";
 import { styles } from "../common/AuthLayout/styles";
 
 const initialValues = {
@@ -42,7 +41,6 @@ export default function Login() {
   const registerRoute = "/register";
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const section = "world";
 
   const formik = useFormik({
     initialValues: initialValues,

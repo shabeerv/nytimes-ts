@@ -13,9 +13,14 @@ const NewsCard = () => {
           <CustomCard
             title={topStory?.title}
             byline={topStory?.byline}
+            // imageURL={
+            //   topStory?.multimedia[0]?.url
+            //     ? `https://static01.nyt.com/${topStory?.multimedia[0]?.url}`
+            //     : "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg"
+            // }
             imageURL={
-              topStory?.multimedia[0]?.url
-                ? `https://nyt.com/${topStory?.multimedia[0]?.url}`
+              topStory?.multimedia?.length > 0
+                ? topStory?.multimedia[0]?.url
                 : "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg"
             }
             abstract={topStory?.abstract}
