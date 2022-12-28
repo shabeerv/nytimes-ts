@@ -8,11 +8,9 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { register, actionTypes as userActions } from "../../actions/userAction";
 import { successSelector } from "../../selectors/statusSelector";
-import { getLatestError } from "../../selectors/errorSelector";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import en from "../../localization/en";
-import { Alert } from "@mui/material";
 import { reset } from "../../reducers/errorReducer";
 import AuthLayout from "../common/AuthLayout";
 import Link from "@mui/material/Link";
@@ -37,7 +35,6 @@ export default function Register() {
   const isSuccess = useAppSelector((state) =>
     successSelector([userActions.REGISTER], state)
   );
-  const isError = useAppSelector(getLatestError);
   const nextRoute = "/";
   const loginRoute = "/login";
   const dispatch = useAppDispatch();
@@ -78,17 +75,6 @@ export default function Register() {
           </React.Fragment>
         );
       })}
-      {isError && (
-        <Alert
-          severity="error"
-          onClose={() => {
-            dispatch(reset());
-          }}
-        >
-          {/*@ts-ignore*/}
-          {isError.message}
-        </Alert>
-      )}
       <CustomButton
         text={en.signUp}
         fullWidth={true}
@@ -102,7 +88,6 @@ export default function Register() {
           onClick={() => dispatch(reset())}
         >
           {en.signinMessage}
-          {/* onClick={dispatch(reset())} */}
         </Link>
       </Grid>
     </AuthLayout>

@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import moment from "moment";
 import Divider from "@mui/material/Divider";
 import CustomButton from "../CustomButton";
+import { styles } from "./styles";
 
 interface ICardProps {
   title: string;
@@ -14,6 +15,7 @@ interface ICardProps {
   section: string;
   abstract: string;
   published_date: string;
+  onClick?: () => void;
 }
 
 const CustomCard: React.FC<ICardProps> = ({
@@ -23,15 +25,10 @@ const CustomCard: React.FC<ICardProps> = ({
   section,
   abstract,
   published_date,
+  onClick,
 }) => {
   return (
-    <Card
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <Card sx={styles.card}>
       <CardMedia
         component="img"
         width="300"
@@ -39,7 +36,7 @@ const CustomCard: React.FC<ICardProps> = ({
         src={imageURL}
         alt="news-img"
       />
-      <CardContent sx={{ flexGrow: 1 }}>
+      <CardContent sx={styles.cardContent}>
         <Typography gutterBottom variant="h6" component="h6">
           {title}
         </Typography>
@@ -53,7 +50,7 @@ const CustomCard: React.FC<ICardProps> = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <CustomButton size="small" text="View" />
+        <CustomButton size="small" text="View" onClick={onClick} />
       </CardActions>
     </Card>
   );

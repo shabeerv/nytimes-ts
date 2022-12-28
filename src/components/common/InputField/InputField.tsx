@@ -27,19 +27,13 @@ const InputForm: React.FC<IInputProp> = ({
         fullWidth
         type={name}
         id={name}
-        label={name}
+        label={label}
         placeholder={placeholder}
         onChange={handleChange}
         autoComplete="off"
         helperText={isError && (formik.errors[name] as React.ReactNode)}
       />
     </>
-
-    //   <div>
-    //     {formik.errors[name] && formik.touched[name] && (
-    //       <span className="input-error">{formik.errors[name] as React.ReactNode}</span>
-    //     )}
-    //   </div>
   );
 };
 

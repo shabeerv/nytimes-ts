@@ -1,3 +1,3 @@
 import { RootState } from "../store";
 
-export const getNews = (state: RootState) => state.news.topStories;
+export const topStoriesSelector = (state: RootState) => state.news.topStories;

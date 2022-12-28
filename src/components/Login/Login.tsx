@@ -8,15 +8,13 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { login, actionTypes as userActions } from "../../actions/userAction";
 import { successSelector } from "../../selectors/statusSelector";
-import { getLatestError } from "../../selectors/errorSelector";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { reset } from "../../reducers/errorReducer";
 import en from "../../localization/en";
-import { Alert } from "@mui/material";
 import AuthLayout from "../common/AuthLayout";
 import Link from "@mui/material/Link";
 import { styles } from "../common/AuthLayout/styles";
+import { reset } from "../../reducers/errorReducer";
 
 const initialValues = {
   email: "",
@@ -36,7 +34,6 @@ export default function Login() {
   const isSuccess = useAppSelector((state) =>
     successSelector([userActions.LOGIN], state)
   );
-  const isError = useAppSelector(getLatestError);
   const nextRoute = "/";
   const registerRoute = "/register";
   const dispatch = useAppDispatch();
@@ -78,18 +75,6 @@ export default function Login() {
           </React.Fragment>
         );
       })}
-      {isError && (
-        <Alert
-          severity="error"
-          onClose={() => {
-            dispatch(reset());
-          }}
-        >
-          {/*@ts-ignore*/}
-          {isError.message}
-        </Alert>
-      )}
-
       <CustomButton
         text={en.signIn}
         fullWidth={true}
@@ -97,9 +82,12 @@ export default function Login() {
         sx={styles.button}
       />
       <Grid container justifyContent="center" item>
-        <Link href={registerRoute} variant="body2">
+        <Link
+          href={registerRoute}
+          variant="body2"
+          onClick={() => dispatch(reset())}
+        >
           {en.signupMessage}
-          {/* onClick={dispatch(reset())} */}
         </Link>
       </Grid>
     </AuthLayout>

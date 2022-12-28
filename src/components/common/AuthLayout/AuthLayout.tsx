@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { FormikProps } from "formik";
 import { styles } from "./styles";
+import ErrorAlert from "./ErrorAlert";
 
 interface ILayoutProps {
   title: string;
@@ -27,6 +28,7 @@ const AuthLayout: React.FC<ILayoutProps> = ({ title, formik, children }) => {
           noValidate
           sx={styles.formBox}
         >
+          <ErrorAlert />
           {children}
         </Box>
       </Box>

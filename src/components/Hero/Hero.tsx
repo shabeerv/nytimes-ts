@@ -7,12 +7,11 @@ import { getTopStories } from "../../actions/newsAction";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
-import NewsCard from "../NewsCard";
 import Header from "../Header";
+import TopStories from "../TopStories";
 
 const Hero = () => {
   const dispatch = useAppDispatch();
-  const [isWorldNews, setIsWorldNews] = useState(true);
   const [alignment, setAlignment] = useState("world");
 
   const handleChange = (
@@ -22,14 +21,9 @@ const Hero = () => {
     setAlignment(newAlignment);
   };
 
-  const onWorldClickHandler = () => {
-    setIsWorldNews(true);
-    dispatch(getTopStories("world"));
-  };
-
-  const onScienceClickHandler = () => {
-    setIsWorldNews(false);
-    dispatch(getTopStories("science"));
+  const toggleButtons = {
+    world: "world",
+    science: "science",
   };
 
   useEffect(() => {
@@ -48,12 +42,13 @@ const Hero = () => {
             onChange={handleChange}
             aria-label="Platform"
           >
-            <ToggleButton onClick={onWorldClickHandler} value="world">
-              World
-            </ToggleButton>
-            <ToggleButton onClick={onScienceClickHandler} value="science">
-              Science
-            </ToggleButton>
+            {Object.keys(toggleButtons).map((key, i) => {
+              return (
+                <ToggleButton key={key} value={key}>
+                  {key}
+                </ToggleButton>
+              );
+            })}
           </ToggleButtonGroup>
         </Stack>
 
@@ -65,9 +60,9 @@ const Hero = () => {
             sx={{ pb: 2 }}
             gutterBottom
           >
-            {isWorldNews ? "World" : "Science"}
+            {alignment}
           </Typography>
-          <NewsCard />
+          <TopStories />
         </Container>
       </main>
     </div>

@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <Box sx={style.commonBox}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             size="large"
@@ -40,7 +40,6 @@ export default function Navbar() {
             color="inherit"
             onClick={logoutClicked}
           />
-          {/* <Button color="inherit" onClick={logoutClicked}> */}
         </Toolbar>
       </AppBar>
     </Box>

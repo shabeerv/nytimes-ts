@@ -12,7 +12,7 @@ export const getTopStories = createAsyncThunk(
   async (section: NewsProps, { rejectWithValue }) => {
     try {
       const response = await NewsController.fetchTopStories(`${section}`);
-      console.log("News: ", response);
+      // console.log("News: ", response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error);

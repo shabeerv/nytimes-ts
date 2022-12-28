@@ -1,31 +1,28 @@
 import Grid from "@mui/material/Grid";
-import { getNews } from "../../selectors/newsSelector";
+import { topStoriesSelector } from "../../selectors/newsSelector";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import CustomCard from "../common/CustomCard";
+import { nytimesLogo } from "../../helpers/constants";
 
-const NewsCard = () => {
-  const topStories = useAppSelector(getNews);
+const TopStories = () => {
+  const topStories = useAppSelector(topStoriesSelector);
 
   return (
     <Grid container spacing={4}>
-      {topStories.map((topStory) => (
+      {topStories.map((topStory, index) => (
         <Grid item key={topStory.uri} xs={12} sm={6} md={4}>
           <CustomCard
             title={topStory?.title}
             byline={topStory?.byline}
-            // imageURL={
-            //   topStory?.multimedia[0]?.url
-            //     ? `https://static01.nyt.com/${topStory?.multimedia[0]?.url}`
-            //     : "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg"
-            // }
             imageURL={
               topStory?.multimedia?.length > 0
                 ? topStory?.multimedia[0]?.url
-                : "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg"
+                : nytimesLogo
             }
             abstract={topStory?.abstract}
             section={topStory?.section}
             published_date={topStory?.published_date}
+            onClick={() => console.log(topStories[index].title)}
           />
         </Grid>
       ))}
@@ -33,4 +30,4 @@ const NewsCard = () => {
   );
 };
 
-export default NewsCard;
+export default TopStories;
