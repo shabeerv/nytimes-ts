@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 interface IProtectedRouteProps {
   authenticated: boolean;
@@ -7,7 +8,16 @@ interface IProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ authenticated, children }: IProtectedRouteProps) => (
-  <>{authenticated ? children : <Navigate replace to="/login" />}</>
+  <>
+    {authenticated ? (
+      <>
+        <Navbar />
+        {children}
+      </>
+    ) : (
+      <Navigate replace to="/login" />
+    )}
+  </>
 );
 
 export default ProtectedRoute;

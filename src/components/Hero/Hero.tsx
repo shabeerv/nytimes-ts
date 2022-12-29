@@ -9,10 +9,12 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
 import Header from "../Header";
 import TopStories from "../TopStories";
+import en from "../../localization/en";
+import { styles } from "./styles";
 
 const Hero = () => {
   const dispatch = useAppDispatch();
-  const [alignment, setAlignment] = useState("world");
+  const [alignment, setAlignment] = useState(en.nytimes.world);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -22,8 +24,8 @@ const Hero = () => {
   };
 
   const toggleButtons = {
-    world: "world",
-    science: "science",
+    world: en.nytimes.world,
+    science: en.nytimes.science,
   };
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const Hero = () => {
         <Header />
         <Stack direction="row" spacing={2} justifyContent="center">
           <ToggleButtonGroup
-            color="info"
+            color="primary"
             value={alignment}
             exclusive
             onChange={handleChange}
@@ -52,12 +54,12 @@ const Hero = () => {
           </ToggleButtonGroup>
         </Stack>
 
-        <Container sx={{ py: 8 }} maxWidth="xl">
+        <Container sx={styles.container} maxWidth="xl">
           <Typography
             component="h4"
             variant="h4"
             align="center"
-            sx={{ pb: 2 }}
+            sx={styles.typography}
             gutterBottom
           >
             {alignment}

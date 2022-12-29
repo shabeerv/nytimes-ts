@@ -22,7 +22,7 @@ const TopStories = () => {
             abstract={topStory?.abstract}
             section={topStory?.section}
             published_date={topStory?.published_date}
-            onClick={() => console.log(topStories[index].title)}
+            index={index}
           />
         </Grid>
       ))}

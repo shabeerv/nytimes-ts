@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import Grid from "@mui/material/Grid";
-import CustomButton from "../common/CustomButton";
+import { useEffect, Fragment } from "react";
 import { useFormik } from "formik";
 import { schema } from "../common/Validation";
 import InputField from "../common/InputField";
@@ -9,12 +7,9 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { login, actionTypes as userActions } from "../../actions/userAction";
 import { successSelector } from "../../selectors/statusSelector";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import en from "../../localization/en";
 import AuthLayout from "../common/AuthLayout";
-import Link from "@mui/material/Link";
-import { styles } from "../common/AuthLayout/styles";
-import { reset } from "../../reducers/errorReducer";
+import { path } from "../../helpers/constants";
 
 const initialValues = {
   email: "",
@@ -22,8 +17,8 @@ const initialValues = {
 };
 
 const labels = {
-  email: "Email",
-  password: "Password",
+  email: en.labels.email,
+  password: en.labels.password,
 };
 
 interface IValueProps {
@@ -34,8 +29,7 @@ export default function Login() {
   const isSuccess = useAppSelector((state) =>
     successSelector([userActions.LOGIN], state)
   );
-  const nextRoute = "/";
-  const registerRoute = "/register";
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -46,24 +40,23 @@ export default function Login() {
       const email = values.email;
       const password = values.password;
       dispatch(login({ email, password }));
-      // dispatch(getTopStories({ section }));
     },
   });
 
   useEffect(() => {
     if (isSuccess) {
-      navigate(nextRoute);
+      navigate(path.HOME);
     }
     //eslint-disable-next-line
   }, [isSuccess]);
 
   return (
-    <AuthLayout title={en.signIn} formik={formik}>
+    <AuthLayout title={en.auth.signIn} formik={formik}>
       {Object.keys(initialValues).map((key, i) => {
         const label = labels[key as keyof IValueProps];
 
         return (
-          <React.Fragment key={key}>
+          <Fragment key={key}>
             <InputField
               key={key}
               name={key}
@@ -72,24 +65,9 @@ export default function Login() {
               label={label}
               formik={formik}
             />
-          </React.Fragment>
+          </Fragment>
         );
       })}
-      <CustomButton
-        text={en.signIn}
-        fullWidth={true}
-        variant="contained"
-        sx={styles.button}
-      />
-      <Grid container justifyContent="center" item>
-        <Link
-          href={registerRoute}
-          variant="body2"
-          onClick={() => dispatch(reset())}
-        >
-          {en.signupMessage}
-        </Link>
-      </Grid>
     </AuthLayout>
   );
 }

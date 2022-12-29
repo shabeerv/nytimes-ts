@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,8 +10,11 @@ import { style } from "./styles";
 import en from "../../localization/en";
 import { logout } from "../../actions/userAction";
 import SearchBox from "../SearchBox/SearchBox";
+import { useState } from "react";
+import AlertDialog from "../AlertDialog";
 
 export default function Navbar() {
+  const [alert, setAlert] = useState(false);
   const dispatch = useAppDispatch();
 
   const logoutClicked = () => {
@@ -36,10 +38,18 @@ export default function Navbar() {
           <Box sx={style.commonBox} />
 
           <CustomButton
-            text={en.logout}
+            text={en.auth.logout}
             color="inherit"
-            onClick={logoutClicked}
+            onClick={() => setAlert(true)}
           />
+          <AlertDialog
+            title="Logout"
+            open={alert}
+            setOpen={setAlert}
+            onConfirm={logoutClicked}
+          >
+            Are you sure that you want to logout?
+          </AlertDialog>
         </Toolbar>
       </AppBar>
     </Box>

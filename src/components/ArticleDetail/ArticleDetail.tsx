@@ -3,16 +3,24 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Divider } from "@mui/material";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { topStoriesSelector } from "../../selectors/newsSelector";
 import { useEffect, useState } from "react";
+import { nytimesLogo, path } from "../../helpers/constants";
+import Container from "@mui/material/Container";
+import Navbar from "../Navbar";
+import moment from "moment";
+import CardActions from "@mui/material/CardActions";
+import Link from "@mui/material/Link";
+import CustomButton from "../common/CustomButton";
+import en from "../../localization/en";
+import CommentsDrawer from "../CommentsDrawer.tsx/CommentsDrawer";
 
 type Props = {
   id: any;
 };
 
-const ArticleDetail = () => {
+const ArticleDetail: React.FC = () => {
   const [article, setArticle] = useState<any>({});
   const { id } = useParams<Props>();
   const navigate = useNavigate();
@@ -28,59 +36,82 @@ const ArticleDetail = () => {
     ) {
       return true;
     } else {
-      navigate("/");
+      navigate(path.HOME);
     }
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     let isValid = validateId();
     if (isValid) {
       setArticle(topStories[id]);
     }
   }, []);
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
-    >
-      <Card sx={{ maxWidth: 800 }}>
-        <CardMedia
-          component="img"
-          src={
-            article.multimedia?.[0]?.url
-              ? `https://nyt.com/${articleList.multimedia[0].url}`
-              : "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg"
-          }
-          alt="news-img"
-        />
-        <CardContent>
-          <Typography component="h1" variant="h3" gutterBottom>
-            {articleList.title}
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "80px",
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography component="h2" variant="caption">
+            {article?.section?.toUpperCase()} -{" "}
+            {article?.subsection?.toUpperCase()} {" | "}
+            {article?.published_date
+              ? moment(article?.published_date).format("LLL")
+              : "N/A"}{" "}
+            {en.nytimes.updated_on}{" "}
+            {article?.updated_date
+              ? moment(article?.updated_date).format("LLL")
+              : "N/A"}
           </Typography>
-          <Typography variant="caption" gutterBottom>
-            {articleList.section} news - {articleList.byline} - Published on:
-            {articleList.published_date}
+          <Typography
+            component="h1"
+            style={{ justifyContent: "center", alignItems: "center" }}
+            variant="h2"
+            gutterBottom
+          >
+            {article?.title}
           </Typography>
-          <Divider />
-          <Typography variant="body1" paragraph>
-            {articleList.abstract}
+          <Typography variant="h6" gutterBottom>
+            {article?.byline}
           </Typography>
-          <Typography variant="caption">
-            <a href={articleList.url}>Web resource</a>
-          </Typography>
-          <Divider />
-          <Typography variant="h6">Comments</Typography>
-          {comments.map((items) => {
-            return (
-              <div key={items.id}>
-                <Typography variant="body2">
-                  {items.user.username}: {items.body}
-                </Typography>
-              </div>
-            );
-          })}
-        </CardContent>
-      </Card>
-    </div>
+          <Card>
+            <CardMedia
+              component="img"
+              src={
+                article?.multimedia?.length > 0
+                  ? article?.multimedia[0]?.url
+                  : nytimesLogo
+              }
+              alt="news-img"
+            />
+            <CardContent sx={{ flexGrow: 1 }}>
+              <Typography component="h2" variant="h3" gutterBottom>
+                {article?.multimedia?.length > 0
+                  ? article?.multimedia[0]?.caption
+                  : ""}
+              </Typography>
+              <Typography variant="body1" paragraph>
+                {article?.abstract}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link href={path.HOME} underline="none">
+                <CustomButton variant="outlined" size="small" text="Back" />
+              </Link>
+              <Link href={article.url} underline="none">
+                <CustomButton variant="contained" size="small" text="Source" />
+              </Link>
+              <CommentsDrawer />
+            </CardActions>
+          </Card>
+        </Container>
+      </div>
+    </>
   );
 };
+
+export default ArticleDetail;

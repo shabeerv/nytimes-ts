@@ -10,9 +10,9 @@ export default function SearchBox() {
     <Paper component="form" sx={styles.paper}>
       <InputBase
         sx={styles.inputBase}
-        placeholder={en.searchPlaceholder}
+        placeholder={en.nytimes.searchPlaceholder}
         autoComplete="true"
-        inputProps={{ "aria-label": en.searchPlaceholder }}
+        inputProps={{ "aria-label": en.nytimes.searchPlaceholder }}
       />
       <IconButton type="button" sx={styles.iconButton} aria-label="search">
         <SearchIcon />

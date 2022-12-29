@@ -23,7 +23,7 @@ const Header = () => {
           color="text.secondary"
           paragraph
         >
-          {en.aboutNY}
+          {en.nytimes.aboutNY}
         </Typography>
       </Container>
     </Box>

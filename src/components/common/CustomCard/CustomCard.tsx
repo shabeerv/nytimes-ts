@@ -7,6 +7,9 @@ import moment from "moment";
 import Divider from "@mui/material/Divider";
 import CustomButton from "../CustomButton";
 import { styles } from "./styles";
+import Link from "@mui/material/Link";
+import { path } from "../../../helpers/constants";
+import en from "../../../localization/en";
 
 interface ICardProps {
   title: string;
@@ -15,7 +18,7 @@ interface ICardProps {
   section: string;
   abstract: string;
   published_date: string;
-  onClick?: () => void;
+  index: number;
 }
 
 const CustomCard: React.FC<ICardProps> = ({
@@ -25,7 +28,7 @@ const CustomCard: React.FC<ICardProps> = ({
   section,
   abstract,
   published_date,
-  onClick,
+  index,
 }) => {
   return (
     <Card sx={styles.card}>
@@ -41,8 +44,8 @@ const CustomCard: React.FC<ICardProps> = ({
           {title}
         </Typography>
         <Typography color="textSecondary" variant="caption">
-          {byline} - section: {section} - published on:
-          {published_date ? moment(published_date).format("LLL") : "N/A"}
+          {byline} - {en.nytimes.section}: {section} - {en.nytimes.published_on}
+          :{published_date ? moment(published_date).format("LLL") : "N/A"}
         </Typography>
         <Divider />
         <Typography variant="body2" component="p">
@@ -50,7 +53,9 @@ const CustomCard: React.FC<ICardProps> = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <CustomButton size="small" text="View" onClick={onClick} />
+        <Link href={`${path.ARTICLEDETAIL}/${index}`} underline="none">
+          <CustomButton size="small" text="View" />
+        </Link>
       </CardActions>
     </Card>
   );

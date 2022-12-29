@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import Grid from "@mui/material/Grid";
-import CustomButton from "../common/CustomButton";
+import { useEffect, Fragment } from "react";
 import { useFormik } from "formik";
 import { schema } from "../common/Validation";
 import InputField from "../common/InputField";
@@ -9,12 +7,9 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { register, actionTypes as userActions } from "../../actions/userAction";
 import { successSelector } from "../../selectors/statusSelector";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import en from "../../localization/en";
-import { reset } from "../../reducers/errorReducer";
 import AuthLayout from "../common/AuthLayout";
-import Link from "@mui/material/Link";
-import { styles } from "../common/AuthLayout/styles";
+import { path } from "../../helpers/constants";
 
 const initialValues = {
   email: "",
@@ -22,8 +17,8 @@ const initialValues = {
 };
 
 const labels = {
-  email: "Email",
-  password: "Password",
+  email: en.labels.email,
+  password: en.labels.password,
 };
 
 interface IValueProps {
@@ -35,8 +30,7 @@ export default function Register() {
   const isSuccess = useAppSelector((state) =>
     successSelector([userActions.REGISTER], state)
   );
-  const nextRoute = "/";
-  const loginRoute = "/login";
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -52,18 +46,18 @@ export default function Register() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate(nextRoute);
+      navigate(path.HOME);
     }
     //eslint-disable-next-line
   }, [isSuccess]);
 
   return (
-    <AuthLayout title={en.signUp} formik={formik}>
+    <AuthLayout title={en.auth.signUp} formik={formik}>
       {Object.keys(initialValues).map((key, i) => {
         const label = labels[key as keyof IValueProps];
 
         return (
-          <React.Fragment key={key}>
+          <Fragment key={key}>
             <InputField
               key={key}
               name={key}
@@ -72,24 +66,9 @@ export default function Register() {
               label={label}
               formik={formik}
             />
-          </React.Fragment>
+          </Fragment>
         );
       })}
-      <CustomButton
-        text={en.signUp}
-        fullWidth={true}
-        variant="contained"
-        sx={styles.button}
-      />
-      <Grid container justifyContent="center" item>
-        <Link
-          href={loginRoute}
-          variant="body2"
-          onClick={() => dispatch(reset())}
-        >
-          {en.signinMessage}
-        </Link>
-      </Grid>
     </AuthLayout>
   );
 }
