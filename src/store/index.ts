@@ -5,11 +5,13 @@ import { persistReducer, persistStore } from "redux-persist";
 import statusReducer from "../reducers/statusReducer";
 import errorReducer from "../reducers/errorReducer";
 import newsReducer from "../reducers/newsReducer";
+import { actionTypes as userActions } from "../actions/userAction";
+import commentsReducer from "../reducers/commentsReducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["image", "status", "error"],
+  blacklist: ["status", "error"],
 };
 
 const combinedReducer = combineReducers({
@@ -17,10 +19,11 @@ const combinedReducer = combineReducers({
   status: statusReducer,
   error: errorReducer,
   news: newsReducer,
+  comments: commentsReducer,
 });
 
 const rootReducer = (state: any, action: AnyAction) => {
-  if (action.type === "user/logout") {
+  if (action.type === userActions.LOGOUT) {
     state = undefined;
   }
   return combinedReducer(state, action);

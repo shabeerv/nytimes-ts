@@ -11,25 +11,32 @@ import { Grid } from "@mui/material";
 import { Link } from "@mui/material";
 import en from "../../../localization/en";
 import { reset } from "../../../reducers/errorReducer";
-import { path } from "../../../helpers/constants";
+import { authTypes, path } from "../../../helpers/constants";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 interface ILayoutProps {
   title: string;
   formik: FormikProps<any>;
   children: React.ReactNode;
+  // isLogin?: boolean;
+  authType: authTypes;
 }
-const AuthLayout: React.FC<ILayoutProps> = ({ title, formik, children }) => {
+const AuthLayout: React.FC<ILayoutProps> = ({
+  title,
+  formik,
+  children,
+  authType,
+}) => {
   const dispatch = useAppDispatch();
 
   const button = {
-    text: title === en.auth.signIn ? en.auth.signIn : en.auth.signUp,
+    text: authType === authTypes.login ? en.auth.signIn : en.auth.signUp,
     fullWidth: true,
     sx: styles.button,
   };
 
   const message = {
-    href: title === en.auth.signIn ? path.REGISTER : path.LOGIN,
+    href: authType === authTypes.login ? path.REGISTER : path.LOGIN,
     variant: "body2",
     onClick: () => dispatch(reset()),
   };
@@ -55,7 +62,7 @@ const AuthLayout: React.FC<ILayoutProps> = ({ title, formik, children }) => {
           <CustomButton {...button} variant="contained" />
           <Grid container justifyContent="center" item>
             <Link {...message} variant="body2">
-              {title === en.auth.signIn
+              {authType === authTypes.login
                 ? en.auth.signupMessage
                 : en.auth.signinMessage}
             </Link>

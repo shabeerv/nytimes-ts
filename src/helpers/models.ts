@@ -10,3 +10,12 @@ export interface INews {
   url: string;
   uri: string;
 }
+
+export interface IComments {
+  body: string;
+  id: number;
+  user: {
+    id: number;
+    username: string;
+  };
+}

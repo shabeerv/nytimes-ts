@@ -9,7 +9,7 @@ import { successSelector } from "../../selectors/statusSelector";
 import { useNavigate } from "react-router-dom";
 import en from "../../localization/en";
 import AuthLayout from "../common/AuthLayout";
-import { path } from "../../helpers/constants";
+import { authTypes, path } from "../../helpers/constants";
 
 const initialValues = {
   email: "",
@@ -51,7 +51,11 @@ export default function Login() {
   }, [isSuccess]);
 
   return (
-    <AuthLayout title={en.auth.signIn} formik={formik}>
+    <AuthLayout
+      title={en.auth.signIn}
+      formik={formik}
+      authType={authTypes.login}
+    >
       {Object.keys(initialValues).map((key, i) => {
         const label = labels[key as keyof IValueProps];
 

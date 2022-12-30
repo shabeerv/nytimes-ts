@@ -17,7 +17,6 @@ export const login = createAsyncThunk(
   async ({ email, password }: EmailProps, { rejectWithValue }) => {
     try {
       const response = await UserController.login(email, password);
-      console.log("login:", email, password);
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -31,8 +30,6 @@ export const register = createAsyncThunk(
     console.log(email, password);
     try {
       const response = await UserController.register(email, password);
-      console.log("Response only:", response);
-      console.log("Data", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -40,4 +37,4 @@ export const register = createAsyncThunk(
   }
 );
 
-export const logout = createAction("user/logout");
+export const logout = createAction(actionTypes.LOGOUT);

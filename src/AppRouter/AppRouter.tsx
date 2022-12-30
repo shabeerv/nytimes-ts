@@ -15,7 +15,14 @@ function AppRouter() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/article/:id" element={<ArticleDetail />} />
+        <Route
+          path="/article/:id"
+          element={
+            <ProtectedRoute authenticated={user.isAuth}>
+              <ArticleDetail />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/"
           element={

@@ -7,3 +7,8 @@ export const path = {
   REGISTER: "/register",
   ARTICLEDETAIL: "/article",
 };
+
+export enum authTypes {
+  login = "login",
+  register = "register",
+}

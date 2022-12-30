@@ -8,13 +8,13 @@ import { topStoriesSelector } from "../../selectors/newsSelector";
 import { useEffect, useState } from "react";
 import { nytimesLogo, path } from "../../helpers/constants";
 import Container from "@mui/material/Container";
-import Navbar from "../Navbar";
 import moment from "moment";
 import CardActions from "@mui/material/CardActions";
 import Link from "@mui/material/Link";
 import CustomButton from "../common/CustomButton";
 import en from "../../localization/en";
-import CommentsDrawer from "../CommentsDrawer.tsx/CommentsDrawer";
+import Comments from "../Comments";
+import { styles } from "./styles";
 
 type Props = {
   id: any;
@@ -27,13 +27,7 @@ const ArticleDetail: React.FC = () => {
   const topStories = useAppSelector(topStoriesSelector);
 
   const validateId = () => {
-    if (
-      id &&
-      topStories &&
-      topStories?.length > 0 &&
-      id <= topStories?.length &&
-      id >= 0
-    ) {
+    if (topStories?.length > 0 && id <= topStories?.length && id >= 0) {
       return true;
     } else {
       navigate(path.HOME);
@@ -48,13 +42,7 @@ const ArticleDetail: React.FC = () => {
   }, []);
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "80px",
-        }}
-      >
+      <div style={styles.div}>
         <Container maxWidth="lg">
           <Typography component="h2" variant="caption">
             {article?.section?.toUpperCase()} -{" "}
@@ -88,7 +76,7 @@ const ArticleDetail: React.FC = () => {
               }
               alt="news-img"
             />
-            <CardContent sx={{ flexGrow: 1 }}>
+            <CardContent sx={styles.cardContent}>
               <Typography component="h2" variant="h3" gutterBottom>
                 {article?.multimedia?.length > 0
                   ? article?.multimedia[0]?.caption
@@ -102,12 +90,12 @@ const ArticleDetail: React.FC = () => {
               <Link href={path.HOME} underline="none">
                 <CustomButton variant="outlined" size="small" text="Back" />
               </Link>
-              <Link href={article.url} underline="none">
+              <Link href={article?.url} underline="none">
                 <CustomButton variant="contained" size="small" text="Source" />
               </Link>
-              <CommentsDrawer />
             </CardActions>
           </Card>
+          <Comments />
         </Container>
       </div>
     </>
