@@ -6,23 +6,62 @@ import en from "../../localization/en";
 import { styles } from "./styles";
 import Autocomplete from "@mui/material/Autocomplete";
 import { TextField } from "@mui/material";
+import React from "react";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { addSearchHistory, searchResult } from "../../actions/newsAction";
+import { useState } from "react";
 
 export default function SearchBox() {
+  const [value, setValue] = useState("");
+  const dispatch = useAppDispatch();
+
+  // const onInputChange = (event: React.SyntheticEvent<Element, Event>) => {
+  //   setValue(event.target.value);
+  // };
+
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(searchResult('germany'));
+  };
+
   return (
-    <Paper component="form" sx={styles.paper}>
-      <Autocomplete
+    <Paper component="form" onSubmit={submitHandler} sx={styles.paper}>
+      {/* <Autocomplete
         freeSolo
         id="free-solo-2-demo"
         sx={styles.inputBase}
         disableClearable
         options={top100Films.map((option) => option.title)}
+        placeholder={en.nytimes.searchPlaceholder}
+        value={value}
+        inputValue={value}
+        onInputChange={onInputChange}
         renderInput={(params) => {
           const { InputLabelProps, InputProps, ...rest } = params;
+    
+          return <InputBase {...rest} type='search' {...params.InputProps} />;
+        }} */}
+      {/* // renderInput={(params) => (
+        //   <InputBase
+        //     {...params}
+        //     inputProps={{
+        //       ...params.InputProps,
+        //       type: 'search',
+        //     }}
+        //   />
+        // )} */}
 
-          return <InputBase {...rest} {...params.InputProps} />;
+      <Autocomplete
+        id="combo-box-demo"
+        options={top100Films}
+        getOptionLabel={(option) => option.title}
+        sx={styles.inputBase}
+        renderInput={(params) => {
+          const { InputLabelProps, InputProps, ...rest } = params;
+          return <InputBase {...params.InputProps} {...rest} />;
         }}
       />
-      <IconButton type="button" sx={styles.iconButton} aria-label="search">
+      <IconButton type="submit" sx={styles.iconButton} aria-label="search">
         <SearchIcon />
       </IconButton>
     </Paper>

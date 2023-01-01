@@ -9,7 +9,8 @@ const TopStories = () => {
 
   return (
     <Grid container spacing={4}>
-      {topStories.map((topStory, index) => (
+      {topStories.filter((topStory) =>  topStory.byline && topStory.byline !== "")
+      ?.map((topStory, index) => (
         <Grid item key={topStory.uri} xs={12} sm={6} md={4}>
           <CustomCard
             title={topStory?.title}

@@ -11,6 +11,22 @@ export interface INews {
   uri: string;
 }
 
+export interface ISearchResults {
+  abstract: string;
+  byline: {
+    orginal: string;
+  };
+  headline: {
+    main: string;
+  };
+  section_name: string;
+  multimedia: Array<{
+    url: string;
+  }>;
+  pub_date: string;
+  _id: string;
+}
+
 export interface IComments {
   body: string;
   id: number;

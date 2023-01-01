@@ -18,7 +18,7 @@ interface ICardProps {
   section: string;
   abstract: string;
   published_date: string;
-  index: number;
+  index?: number;
 }
 
 const CustomCard: React.FC<ICardProps> = ({
