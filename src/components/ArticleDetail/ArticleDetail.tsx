@@ -39,6 +39,7 @@ const ArticleDetail: React.FC = () => {
     if (isValid) {
       setArticle(topStories[id]);
     }
+    // eslint-disable-next-line
   }, []);
   return (
     <>
@@ -50,7 +51,7 @@ const ArticleDetail: React.FC = () => {
             {article?.published_date
               ? moment(article?.published_date).format("LLL")
               : "N/A"}{" "}
-            {en.nytimes.updated_on}{" "}
+            {en.updated_on}{" "}
             {article?.updated_date
               ? moment(article?.updated_date).format("LLL")
               : "N/A"}

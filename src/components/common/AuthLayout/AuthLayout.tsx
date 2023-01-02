@@ -30,7 +30,7 @@ const AuthLayout: React.FC<ILayoutProps> = ({
   const dispatch = useAppDispatch();
 
   const button = {
-    text: authType === authTypes.login ? en.auth.signIn : en.auth.signUp,
+    text: authType === authTypes.login ? en.signIn : en.signUp,
     fullWidth: true,
     sx: styles.button,
   };
@@ -63,8 +63,8 @@ const AuthLayout: React.FC<ILayoutProps> = ({
           <Grid container justifyContent="center" item>
             <Link {...message} variant="body2">
               {authType === authTypes.login
-                ? en.auth.signupMessage
-                : en.auth.signinMessage}
+                ? en.signupMessage
+                : en.signinMessage}
             </Link>
           </Grid>
         </Box>

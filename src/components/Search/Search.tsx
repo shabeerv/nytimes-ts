@@ -1,9 +1,7 @@
 import CustomCard from "../../components/common/CustomCard";
-import Hero from "../../components/Hero";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { searchResultSelector } from "../../selectors/newsSelector";
 import { Grid } from "@mui/material";
-import Header from "../../components/Header";
 import CustomButton from "../../components/common/CustomButton";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { clearSearch } from "../../actions/newsAction";
@@ -12,9 +10,11 @@ import Container from "@mui/material/Container";
 import { nytimesLogo, nytimesURL } from "../../helpers/constants";
 import { useState } from "react";
 import Pagination from "@mui/material/Pagination";
+import { styles } from "./styles";
+import Typography from "@mui/material/Typography";
 
 const Search = () => {
-  const searchResults = useAppSelector(searchResultSelector);
+  const searchResults = useAppSelector(searchResultSelector) as Array<any>;
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
 
@@ -22,40 +22,57 @@ const Search = () => {
     <>
       <Stack direction="row" spacing={2} justifyContent="center">
         <CustomButton
-          text="back"
+          text="Clear Search"
           variant="contained"
           onClick={() => dispatch(clearSearch())}
         />
       </Stack>
-      <Container sx={{ py: 8 }} maxWidth="xl">
+      <Container sx={styles.container} maxWidth="xl">
+        <Typography
+          component="h4"
+          variant="h4"
+          align="center"
+          sx={styles.typography}
+          gutterBottom
+        >
+          Search Results
+        </Typography>
         <Grid container spacing={4}>
-          {searchResults[page - 1].map((searchResult, index) => (
-            <Grid item key={searchResult._id} xs={12} sm={6} md={4}>
-              <CustomCard
-                title={searchResult?.headline.main}
-                byline={searchResult?.byline.orginal}
-                imageURL={
-                  searchResult?.multimedia?.length > 0
-                    ? `${nytimesURL}${searchResult?.multimedia[0]?.url}`
-                    : nytimesLogo
-                }
-                abstract={searchResult.abstract}
-                section={searchResult.section_name}
-                published_date={searchResult.pub_date}
-                index={index}
+          {searchResults[page - 1]
+            ?.filter(
+              //@ts-ignore
+              (searchResult?) =>
+                searchResult?.byline && searchResult?.byline?.original !== ""
+            )
+            //@ts-ignore
+            ?.map((searchResult?) => (
+              <Grid item key={searchResult?._id} xs={12} sm={6} md={4}>
+                <CustomCard
+                  title={searchResult?.headline.main}
+                  byline={searchResult?.byline.orginal}
+                  imageURL={
+                    searchResult?.multimedia?.length > 0
+                      ? `${nytimesURL}${searchResult?.multimedia[0]?.url}`
+                      : nytimesLogo
+                  }
+                  abstract={searchResult.abstract}
+                  section={searchResult.section_name}
+                  published_date={searchResult.pub_date}
+                />
+              </Grid>
+            ))}
+          <Grid container xs={12} justifyContent="center" alignItems="center">
+            <Grid item={true}>
+              <Pagination
+                count={searchResults?.length}
+                page={page}
+                onChange={(event, value) => {
+                  setPage(value);
+                }}
+                variant="outlined"
+                shape="rounded"
               />
             </Grid>
-          ))}
-          <Grid container xs={12} justifyContent="center" alignItems="center">
-            <Pagination
-              count={searchResults?.length}
-              page={page}
-              onChange={(event, value) => {
-                setPage(value);
-              }}
-              variant="outlined"
-              shape="rounded"
-            />
           </Grid>
         </Grid>
       </Container>

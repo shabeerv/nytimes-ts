@@ -7,11 +7,11 @@ import { useState } from "react";
 import TopStories from "../TopStories";
 import en from "../../localization/en";
 import { styles } from "./styles";
-import CategoriesButton from "../CategoriesButton/CategoriesButton";
+import CategoriesButton from "./CategoriesButton/CategoriesButton";
 
-const Hero = () => {
+const Articles = () => {
   const dispatch = useAppDispatch();
-  const [alignment, setAlignment] = useState(en.nytimes.world);
+  const [alignment, setAlignment] = useState(en.world);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -26,22 +26,22 @@ const Hero = () => {
 
   return (
     <>
-       <CategoriesButton value={alignment} onChange={handleChange} />
+      <CategoriesButton value={alignment} onChange={handleChange} />
 
-        <Container sx={styles.container} maxWidth="xl">
-          <Typography
-            component="h4"
-            variant="h4"
-            align="center"
-            sx={styles.typography}
-            gutterBottom
-          >
-            {alignment}
-          </Typography>
-          <TopStories />
-        </Container>
+      <Container sx={styles.container} maxWidth="xl">
+        <Typography
+          component="h4"
+          variant="h4"
+          align="center"
+          sx={styles.typography}
+          gutterBottom
+        >
+          {alignment}
+        </Typography>
+        <TopStories />
+      </Container>
     </>
   );
 };
 
-export default Hero;
+export default Articles;

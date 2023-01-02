@@ -17,8 +17,8 @@ const initialValues = {
 };
 
 const labels = {
-  email: en.labels.email,
-  password: en.labels.password,
+  email: en.email,
+  password: en.password,
 };
 
 interface IValueProps {
@@ -52,11 +52,7 @@ export default function Register() {
   }, [isSuccess]);
 
   return (
-    <AuthLayout
-      title={en.auth.signUp}
-      formik={formik}
-      authType={authTypes.register}
-    >
+    <AuthLayout title={en.signUp} formik={formik} authType={authTypes.register}>
       {Object.keys(initialValues).map((key, i) => {
         const label = labels[key as keyof IValueProps];
 

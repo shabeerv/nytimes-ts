@@ -44,8 +44,8 @@ const CustomCard: React.FC<ICardProps> = ({
           {title}
         </Typography>
         <Typography color="textSecondary" variant="caption">
-          {byline} - {en.nytimes.section}: {section} - {en.nytimes.published_on}
-          :{published_date ? moment(published_date).format("LLL") : "N/A"}
+          {byline} - {en.section}: {section} - {en.published_on}:
+          {published_date ? moment(published_date).format("LLL") : "N/A"}
         </Typography>
         <Divider />
         <Typography variant="body2" component="p">

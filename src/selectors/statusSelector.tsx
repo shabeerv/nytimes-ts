@@ -1,12 +1,15 @@
 import { LOADING, NOT_STARTED, ERROR, SUCCESS } from "../helpers/status";
-import {  StatusTypes } from "../reducers/statusReducer";
+import { StatusTypes } from "../reducers/statusReducer";
 import { RootState } from "../store";
 
+export const statusSelector = (action: string, state: RootState) =>
+  state.status[action];
 
-export const statusSelector = (action: string, state: RootState) => state.status[action];
-
-export const hasStatusSelector = (action: string, status: StatusTypes, state: RootState) =>
-  state.status[action] === status;
+export const hasStatusSelector = (
+  action: string,
+  status: StatusTypes,
+  state: RootState
+) => state.status[action] === status;
 
 export const notStartedSelector = (actions: string[], state: RootState) =>
   actions.reduce((prevState, value) => {

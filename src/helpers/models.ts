@@ -12,6 +12,7 @@ export interface INews {
 }
 
 export interface ISearchResults {
+  [x: string]: any;
   abstract: string;
   byline: {
     orginal: string;
