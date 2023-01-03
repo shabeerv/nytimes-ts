@@ -3,16 +3,21 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { topStoriesSelector } from "../../selectors/newsSelector";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { topStoriesSelector } from "../../../selectors/newsSelector";
 import { useEffect, useState } from "react";
-import { nytimesLogo, path } from "../../helpers/constants";
+import {
+  muiButtonSize,
+  muiButtonVariants,
+  nytimesLogo,
+  path,
+} from "../../../helpers/constants";
 import Container from "@mui/material/Container";
 import moment from "moment";
 import CardActions from "@mui/material/CardActions";
 import Link from "@mui/material/Link";
-import CustomButton from "../common/CustomButton";
-import en from "../../localization/en";
+import CustomButton from "../../common/CustomButton";
+import en from "../../../localization/en";
 import Comments from "../Comments";
 import { styles } from "./styles";
 
@@ -89,10 +94,18 @@ const ArticleDetail: React.FC = () => {
             </CardContent>
             <CardActions>
               <Link href={path.HOME} underline="none">
-                <CustomButton variant="outlined" size="small" text="Back" />
+                <CustomButton
+                  variant={muiButtonVariants.outlined}
+                  size={muiButtonSize.small}
+                  text="Back"
+                />
               </Link>
               <Link href={article?.url} underline="none">
-                <CustomButton variant="contained" size="small" text="Source" />
+                <CustomButton
+                  variant={muiButtonVariants.outlined}
+                  size={muiButtonSize.small}
+                  text="Source"
+                />
               </Link>
             </CardActions>
           </Card>

@@ -5,6 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CustomButton from "../common/CustomButton";
+import { muiButtonVariants } from "../../helpers/constants";
 
 interface IDialogProps {
   title: string;
@@ -36,7 +37,7 @@ const AlertDialog: React.FC<IDialogProps> = ({
       <DialogActions>
         <CustomButton text="Close" onClick={() => setOpen(false)} />
         <CustomButton
-          variant="contained"
+          variant={muiButtonVariants.contained}
           text="Confirm"
           onClick={() => {
             setOpen(false);

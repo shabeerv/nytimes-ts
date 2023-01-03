@@ -5,7 +5,7 @@ import Login from "../components/Login";
 import { getUser } from "../selectors/userSelector";
 import ProtectedRoute from "./ProtectedRoute";
 import Register from "../components/Register";
-import ArticleDetail from "../components/ArticleDetail";
+import ArticleDetail from "../components/Articles/ArticleDetail";
 
 function AppRouter() {
   const user = useAppSelector(getUser);

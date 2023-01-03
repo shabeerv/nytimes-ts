@@ -7,11 +7,14 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { clearSearch } from "../../actions/newsAction";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
-import { nytimesLogo, nytimesURL } from "../../helpers/constants";
+import {
+  muiButtonVariants,
+  nytimesLogo,
+  nytimesURL,
+} from "../../helpers/constants";
 import { useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import { styles } from "./styles";
-import Typography from "@mui/material/Typography";
 
 const Search = () => {
   const searchResults = useAppSelector(searchResultSelector) as Array<any>;
@@ -23,20 +26,11 @@ const Search = () => {
       <Stack direction="row" spacing={2} justifyContent="center">
         <CustomButton
           text="Clear Search"
-          variant="contained"
+          variant={muiButtonVariants.contained}
           onClick={() => dispatch(clearSearch())}
         />
       </Stack>
       <Container sx={styles.container} maxWidth="xl">
-        <Typography
-          component="h4"
-          variant="h4"
-          align="center"
-          sx={styles.typography}
-          gutterBottom
-        >
-          Search Results
-        </Typography>
         <Grid container spacing={4}>
           {searchResults[page - 1]
             ?.filter(

@@ -30,15 +30,22 @@ export const sliceIntoChunks = (arr: any, chunkSize: any) => {
 
 const newsReducer = createReducer(initialState, (builder) => {
   builder.addCase(getTopStories.fulfilled, (state, action) => {
-    state.topStories = action.payload.results;
+    // state.topStories = action.payload.filter((item) => {
+    //   return item.title !== "" && item.abstract !== "";
+    // });
+
+    const filteredStories = action.payload.filter((item) => {
+      return item.title !== "" && item.abstract !== "";
+    });
+
+    state.topStories = filteredStories;
   });
 
   builder.addCase(updateSearchHistory, (state, action) => {
-    if (state.searchHistory.length >= 5) {
-      state.searchHistory.shift();
-    }
-    if (!state.searchHistory.includes(action.payload)) {
-      state.searchHistory.push(action.payload);
+    state.searchHistory?.length >= 5 && state.searchHistory?.shift();
+
+    if (!state.searchHistory?.includes(action?.payload)) {
+      state.searchHistory?.push(action?.payload);
     }
   });
 

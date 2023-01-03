@@ -1,5 +1,6 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import NewsController from "../controllers/NewsController";
+import { INews } from "../helpers/models";
 
 export const actionTypes = {
   GETTOPSTORIES: "news/GETTOPSTORIES",
@@ -15,7 +16,7 @@ export const getTopStories = createAsyncThunk(
   async (section: NewsProps, { rejectWithValue }) => {
     try {
       const response = await NewsController.fetchTopStories(`${section}`);
-      return response.data;
+      return response.data.results as Array<INews>;
     } catch (error) {
       return rejectWithValue(error);
     }

@@ -1,22 +1,19 @@
 import { SxProps } from "@mui/material";
 import Button from "@mui/material/Button";
+import {
+  muiButtonColors,
+  muiButtonSize,
+  muiButtonVariants,
+} from "../../../helpers/constants";
 
 type Props = {
   text: string;
   fullWidth?: boolean;
   sx?: SxProps;
   onClick?: () => void;
-  variant?: "text" | "outlined" | "contained";
-  color?:
-    | "error"
-    | "inherit"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "info"
-    | "warning"
-    | undefined;
-  size?: "small" | "medium" | "large" | undefined;
+  variant?: muiButtonVariants;
+  color?: muiButtonColors;
+  size?: muiButtonSize;
 };
 
 const CustomButton: React.FC<Props> = ({

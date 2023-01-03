@@ -4,10 +4,10 @@ import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { getComments } from "../../actions/commentsAction";
-import { commentsSelector } from "../../selectors/commentsSelector";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { getComments } from "../../../actions/commentsAction";
+import { commentsSelector } from "../../../selectors/commentsSelector";
+import { useAppSelector } from "../../../hooks/useAppSelector";
 import { styles } from "./styles";
 
 const Comments = () => {

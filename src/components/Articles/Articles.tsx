@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { getTopStories } from "../../actions/newsAction";
 import { useState } from "react";
-import TopStories from "../TopStories";
+import TopStories from "./TopStories";
 import en from "../../localization/en";
 import { styles } from "./styles";
 import CategoriesButton from "./CategoriesButton/CategoriesButton";

@@ -5,20 +5,21 @@ import SearchIcon from "@mui/icons-material/Search";
 import en from "../../../localization/en";
 import { styles } from "./styles";
 import Autocomplete from "@mui/material/Autocomplete";
-import React from "react";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { searchResult, updateSearchHistory } from "../../../actions/newsAction";
-import { useState } from "react";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { searchHistorySelector } from "../../../selectors/newsSelector";
 import { useCallback } from "react";
 import { debounce } from "@mui/material";
 
 export default function SearchInput() {
-  const [input, setInput] = useState("");
   const dispatch = useAppDispatch();
   const searchHistory = useAppSelector(searchHistorySelector);
 
+  // const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   // console.log(event.target.value);
+  //   setInput(event.target.value);
+  // };
   // const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
   //   dispatch(searchResult(input));
@@ -26,19 +27,13 @@ export default function SearchInput() {
   // };
 
   const changeHandler = (event: any, value: string) => {
-    setInput(value);
     if (value.length > 0 && value !== "") {
       dispatch(searchResult(value));
       dispatch(updateSearchHistory(value));
     }
   };
 
-  const debouncedChangeHandler = useCallback(debounce(changeHandler, 800), []);
-
-  // const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   // console.log(event.target.value);
-  //   setInput(event.target.value);
-  // };
+  const debouncedChangeHandler = useCallback(debounce(changeHandler, 500), []);
 
   return (
     <Paper component="form" sx={styles.paper}>

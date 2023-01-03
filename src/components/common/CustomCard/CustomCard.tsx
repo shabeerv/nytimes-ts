@@ -8,8 +8,9 @@ import Divider from "@mui/material/Divider";
 import CustomButton from "../CustomButton";
 import { styles } from "./styles";
 import Link from "@mui/material/Link";
-import { path } from "../../../helpers/constants";
+import { muiButtonSize, path } from "../../../helpers/constants";
 import en from "../../../localization/en";
+import { memo } from "react";
 
 interface ICardProps {
   title: string;
@@ -54,11 +55,11 @@ const CustomCard: React.FC<ICardProps> = ({
       </CardContent>
       <CardActions>
         <Link href={`${path.ARTICLEDETAIL}/${index}`} underline="none">
-          <CustomButton size="small" text="View" />
+          <CustomButton size={muiButtonSize.small} text="View" />
         </Link>
       </CardActions>
     </Card>
   );
 };
 
-export default CustomCard;
+export default memo(CustomCard);
