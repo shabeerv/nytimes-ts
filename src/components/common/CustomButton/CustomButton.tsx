@@ -38,7 +38,6 @@ const CustomButton: React.FC<Props> = ({
     <>
       <Button
         type="submit"
-        data-testid="account-delete-submit"
         fullWidth={fullWidth}
         variant={variant}
         sx={sx}
