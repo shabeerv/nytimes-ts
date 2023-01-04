@@ -11,9 +11,17 @@ type Props = {
   fullWidth?: boolean;
   sx?: SxProps;
   onClick?: () => void;
-  variant?: muiButtonVariants;
-  color?: muiButtonColors;
-  size?: muiButtonSize;
+  variant?: "text" | "outlined" | "contained" | undefined;
+  color?:
+    | "inherit"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "error"
+    | "info"
+    | "warning"
+    | undefined;
+  size?: "small" | "medium" | "large" | undefined;
 };
 
 const CustomButton: React.FC<Props> = ({
@@ -30,6 +38,7 @@ const CustomButton: React.FC<Props> = ({
     <>
       <Button
         type="submit"
+        data-testid="account-delete-submit"
         fullWidth={fullWidth}
         variant={variant}
         sx={sx}
