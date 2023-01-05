@@ -6,12 +6,7 @@ import Typography from "@mui/material/Typography";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { topStoriesSelector } from "../../../selectors/newsSelector";
 import { useEffect, useState } from "react";
-import {
-  muiButtonSize,
-  muiButtonVariants,
-  nytimesLogo,
-  path,
-} from "../../../helpers/constants";
+import { nytimesLogo, path } from "../../../helpers/constants";
 import Container from "@mui/material/Container";
 import moment from "moment";
 import CardActions from "@mui/material/CardActions";
@@ -94,18 +89,10 @@ const ArticleDetail: React.FC = () => {
             </CardContent>
             <CardActions>
               <Link href={path.HOME} underline="none">
-                <CustomButton
-                  variant={muiButtonVariants.outlined}
-                  size={muiButtonSize.small}
-                  text="Back"
-                />
+                <CustomButton variant="contained" size="small" text="Back" />
               </Link>
               <Link href={article?.url} underline="none">
-                <CustomButton
-                  variant={muiButtonVariants.outlined}
-                  size={muiButtonSize.small}
-                  text="Source"
-                />
+                <CustomButton variant="contained" size="small" text="Source" />
               </Link>
             </CardActions>
           </Card>

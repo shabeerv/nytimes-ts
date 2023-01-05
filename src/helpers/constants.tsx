@@ -14,25 +14,3 @@ export enum authTypes {
   login = "login",
   register = "register",
 }
-
-export enum muiButtonVariants {
-  text = "text",
-  outlined = "outlined",
-  contained = "contained",
-}
-
-export enum muiButtonColors {
-  error = "error",
-  inherit = "inherit",
-  primary = "primary",
-  secondary = "secondary",
-  success = "success",
-  info = "info",
-  warning = "warning",
-}
-
-export enum muiButtonSize {
-  small = "small",
-  medium = "medium",
-  large = "large",
-}

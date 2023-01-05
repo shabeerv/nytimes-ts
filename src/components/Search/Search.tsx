@@ -7,11 +7,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { clearSearch } from "../../actions/newsAction";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
-import {
-  muiButtonVariants,
-  nytimesLogo,
-  nytimesURL,
-} from "../../helpers/constants";
+import { nytimesLogo, nytimesURL } from "../../helpers/constants";
 import { useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import { styles } from "./styles";
@@ -26,7 +22,7 @@ const Search = () => {
       <Stack direction="row" spacing={2} justifyContent="center">
         <CustomButton
           text="Clear Search"
-          variant={muiButtonVariants.contained}
+          variant="contained"
           onClick={() => dispatch(clearSearch())}
         />
       </Stack>

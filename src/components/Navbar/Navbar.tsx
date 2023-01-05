@@ -11,7 +11,6 @@ import { logout } from "../../actions/userAction";
 import SearchInput from "../Search/SearchInput/SearchInput";
 import { useState } from "react";
 import AlertDialog from "../AlertDialog";
-import { muiButtonColors } from "../../helpers/constants";
 
 export default function Navbar() {
   const [alert, setAlert] = useState(false);
@@ -39,7 +38,7 @@ export default function Navbar() {
 
           <CustomButton
             text={en.logout}
-            color={muiButtonColors.inherit}
+            color="inherit"
             onClick={() => setAlert(true)}
           />
           <AlertDialog

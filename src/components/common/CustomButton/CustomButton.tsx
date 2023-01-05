@@ -1,10 +1,5 @@
 import { SxProps } from "@mui/material";
 import Button from "@mui/material/Button";
-import {
-  muiButtonColors,
-  muiButtonSize,
-  muiButtonVariants,
-} from "../../../helpers/constants";
 
 type Props = {
   text: string;

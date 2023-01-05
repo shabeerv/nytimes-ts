@@ -16,16 +16,6 @@ export default function SearchInput() {
   const dispatch = useAppDispatch();
   const searchHistory = useAppSelector(searchHistorySelector);
 
-  // const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   // console.log(event.target.value);
-  //   setInput(event.target.value);
-  // };
-  // const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   dispatch(searchResult(input));
-  //   dispatch(updateSearchHistory(input));
-  // };
-
   const changeHandler = (event: any, value: string) => {
     if (value.length > 0 && value !== "") {
       dispatch(searchResult(value));
@@ -33,6 +23,7 @@ export default function SearchInput() {
     }
   };
 
+  // eslint-disable-next-line
   const debouncedChangeHandler = useCallback(debounce(changeHandler, 500), []);
 
   return (
@@ -44,7 +35,6 @@ export default function SearchInput() {
         disableClearable
         options={searchHistory.map((option) => option)}
         getOptionLabel={(option) => option}
-        // onSelect={handleInput}
         onInputChange={debouncedChangeHandler}
         renderInput={(params) => {
           const { InputLabelProps, InputProps, ...rest } = params;

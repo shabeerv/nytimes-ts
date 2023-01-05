@@ -11,7 +11,7 @@ import { Grid } from "@mui/material";
 import { Link } from "@mui/material";
 import en from "../../../localization/en";
 import { reset } from "../../../reducers/errorReducer";
-import { authTypes, muiButtonVariants, path } from "../../../helpers/constants";
+import { authTypes, path } from "../../../helpers/constants";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 interface ILayoutProps {
@@ -59,7 +59,7 @@ const AuthLayout: React.FC<ILayoutProps> = ({
           <ErrorAlert />
           {children}
 
-          <CustomButton {...button} variant={muiButtonVariants.contained} />
+          <CustomButton {...button} variant="contained" />
           <Grid container justifyContent="center" item>
             <Link {...message} variant="body2">
               {authType === authTypes.login
