@@ -17,6 +17,7 @@ const Header = () => {
         >
           The New York Times
         </Typography>
+
         <Typography
           variant="h6"
           align="center"

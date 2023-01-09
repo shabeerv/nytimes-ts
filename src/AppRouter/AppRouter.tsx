@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useAppSelector } from "../hooks/useAppSelector";
 import Home from "../pages/Home";
-import Login from "../components/Login";
+import Login from "../components/Auth/Login";
 import { getUser } from "../selectors/userSelector";
 import ProtectedRoute from "./ProtectedRoute";
-import Register from "../components/Register";
+import Register from "../components/Auth/Register";
 import ArticleDetail from "../components/Articles/ArticleDetail";
 
 function AppRouter() {

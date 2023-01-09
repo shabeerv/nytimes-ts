@@ -42,7 +42,8 @@ const newsReducer = createReducer(initialState, (builder) => {
   });
 
   builder.addCase(updateSearchHistory, (state, action) => {
-    state.searchHistory?.length >= 5 && state.searchHistory?.shift();
+    const historyLimit = 5;
+    state.searchHistory?.length >= historyLimit && state.searchHistory?.shift();
 
     if (!state.searchHistory?.includes(action?.payload)) {
       state.searchHistory?.push(action?.payload);

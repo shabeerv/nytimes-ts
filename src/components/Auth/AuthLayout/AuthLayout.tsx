@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import { FormikProps } from "formik";
 import { styles } from "./styles";
 import ErrorAlert from "./ErrorAlert";
-import CustomButton from "../CustomButton";
+import CustomButton from "../../common/CustomButton";
 import { Grid } from "@mui/material";
 import { Link } from "@mui/material";
 import en from "../../../localization/en";
@@ -47,9 +47,11 @@ const AuthLayout: React.FC<ILayoutProps> = ({
         <Avatar sx={styles.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+
         <Typography component="h1" variant="h5">
           {title}
         </Typography>
+
         <Box
           component="form"
           onSubmit={formik.handleSubmit}
@@ -60,6 +62,7 @@ const AuthLayout: React.FC<ILayoutProps> = ({
           {children}
 
           <CustomButton {...button} variant="contained" />
+
           <Grid container justifyContent="center" item>
             <Link {...message} variant="body2">
               {authType === authTypes.login

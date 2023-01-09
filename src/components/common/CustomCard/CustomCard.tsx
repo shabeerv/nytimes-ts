@@ -44,15 +44,18 @@ const CustomCard: React.FC<ICardProps> = ({
         <Typography gutterBottom variant="h6" component="h6">
           {title}
         </Typography>
+
         <Typography color="textSecondary" variant="caption">
           {byline} - {en.section}: {section} - {en.published_on}:
           {published_date ? moment(published_date).format("LLL") : "N/A"}
         </Typography>
+
         <Divider />
         <Typography variant="body2" component="p">
           {abstract}
         </Typography>
       </CardContent>
+
       <CardActions>
         <Link href={`${path.ARTICLEDETAIL}/${index}`} underline="none">
           <CustomButton size="small" text="View" />

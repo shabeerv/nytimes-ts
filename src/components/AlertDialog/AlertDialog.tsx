@@ -28,11 +28,13 @@ const AlertDialog: React.FC<IDialogProps> = ({
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           {children}
         </DialogContentText>
       </DialogContent>
+
       <DialogActions>
         <CustomButton text="Close" onClick={() => setOpen(false)} />
         <CustomButton

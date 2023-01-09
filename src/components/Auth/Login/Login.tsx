@@ -1,15 +1,15 @@
 import { useEffect, Fragment } from "react";
 import { useFormik } from "formik";
-import { schema } from "../common/Validation";
-import InputField from "../common/InputField";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { login, actionTypes as userActions } from "../../actions/userAction";
-import { successSelector } from "../../selectors/statusSelector";
+import { schema } from "../../common/Validation";
+import InputField from "../../common/InputField";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { login, actionTypes as userActions } from "../../../actions/userAction";
+import { successSelector } from "../../../selectors/statusSelector";
 import { useNavigate } from "react-router-dom";
-import en from "../../localization/en";
-import AuthLayout from "../common/AuthLayout";
-import { authTypes, path } from "../../helpers/constants";
+import en from "../../../localization/en";
+import AuthLayout from "../AuthLayout";
+import { authTypes, path } from "../../../helpers/constants";
 
 const initialValues = {
   email: "",
@@ -36,6 +36,7 @@ export default function Login() {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: schema,
+
     onSubmit: (values) => {
       const email = values.email;
       const password = values.password;

@@ -26,6 +26,7 @@ const Search = () => {
           onClick={() => dispatch(clearSearch())}
         />
       </Stack>
+
       <Container sx={styles.container} maxWidth="xl">
         <Grid container spacing={4}>
           {searchResults[page - 1]
@@ -51,6 +52,7 @@ const Search = () => {
                 />
               </Grid>
             ))}
+
           <Grid container xs={12} justifyContent="center" alignItems="center">
             <Grid item={true}>
               <Pagination

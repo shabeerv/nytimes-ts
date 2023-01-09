@@ -9,6 +9,7 @@ export interface IInitialState {
 const initialState: IInitialState = {
   comments: [],
 };
+
 const commentsReducer = createReducer(initialState, (builder) => {
   builder.addCase(getComments.fulfilled, (state, action) => {
     state.comments = action.payload.comments;
