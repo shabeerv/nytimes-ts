@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
-import en from "../../../localization/en";
+import strings from "../../../localization";
 
 interface ICategoriesProps {
   value: string;
@@ -12,8 +12,8 @@ interface ICategoriesProps {
 
 const CategoriesButton: React.FC<ICategoriesProps> = ({ value, onChange }) => {
   const toggleButtons = {
-    world: en.world,
-    science: en.science,
+    world: strings.world,
+    science: strings.science,
   };
 
   return (
@@ -23,9 +23,8 @@ const CategoriesButton: React.FC<ICategoriesProps> = ({ value, onChange }) => {
         value={value}
         exclusive
         onChange={onChange}
-        aria-label="Platform"
       >
-        {Object.keys(toggleButtons).map((key, i) => {
+        {Object.keys(toggleButtons).map((key) => {
           return (
             <ToggleButton key={key} value={key}>
               {key}
@@ -36,4 +35,5 @@ const CategoriesButton: React.FC<ICategoriesProps> = ({ value, onChange }) => {
     </Stack>
   );
 };
+
 export default CategoriesButton;

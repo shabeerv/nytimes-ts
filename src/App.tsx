@@ -13,9 +13,7 @@ function App() {
     <>
       <Loader show={load} />
       <AppProviders>
-        <div className="App">
-          <AppRouter />
-        </div>
+        <AppRouter />
       </AppProviders>
     </>
   );

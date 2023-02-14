@@ -1,15 +1,15 @@
 import { useEffect, Fragment } from "react";
 import { useFormik } from "formik";
-import { schema } from "../../common/Validation";
+import { schema } from "../../../helpers/validation";
 import InputField from "../../common/InputField";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { login, actionTypes as userActions } from "../../../actions/userAction";
 import { successSelector } from "../../../selectors/statusSelector";
 import { useNavigate } from "react-router-dom";
-import en from "../../../localization/en";
 import AuthLayout from "../AuthLayout";
 import { authTypes, path } from "../../../helpers/constants";
+import strings from "../../../localization";
 
 const initialValues = {
   email: "",
@@ -17,8 +17,8 @@ const initialValues = {
 };
 
 const labels = {
-  email: en.email,
-  password: en.password,
+  email: strings.email,
+  password: strings.password,
 };
 
 interface IValueProps {
@@ -52,8 +52,12 @@ export default function Login() {
   }, [isSuccess]);
 
   return (
-    <AuthLayout title={en.signIn} formik={formik} authType={authTypes.login}>
-      {Object.keys(initialValues).map((key, i) => {
+    <AuthLayout
+      title={strings.signIn}
+      formik={formik}
+      authType={authTypes.login}
+    >
+      {Object.keys(initialValues).map((key) => {
         const label = labels[key as keyof IValueProps];
 
         return (
@@ -61,7 +65,7 @@ export default function Login() {
             <InputField
               key={key}
               name={key}
-              placeholder={`Enter ${label}`}
+              placeholder={`${strings.enterText} ${label}`}
               handleChange={formik.handleChange}
               label={label}
               formik={formik}

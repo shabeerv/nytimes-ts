@@ -30,7 +30,6 @@ export const searchResult = createAsyncThunk(
   async (keyword: string, { rejectWithValue }) => {
     try {
       const response = await NewsController.searchArticle(`${keyword}`);
-      console.log(response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error);

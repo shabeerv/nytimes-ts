@@ -11,9 +11,8 @@ const initialState: IInitialState = {
 };
 
 const commentsReducer = createReducer(initialState, (builder) => {
-  builder.addCase(getComments.fulfilled, (state, action) => {
-    state.comments = action.payload.comments;
-    console.log(action.payload.comments);
+  builder.addCase(getComments.fulfilled, (state, { payload }) => {
+    state.comments = payload?.comments;
   });
 });
 

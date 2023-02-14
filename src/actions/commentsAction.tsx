@@ -10,8 +10,6 @@ export const getComments = createAsyncThunk(
   async () => {
     try {
       const response = await CommentsController.fetchComments();
-      console.log(response);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return error;

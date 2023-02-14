@@ -6,15 +6,18 @@ import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import CustomButton from "../common/CustomButton";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { style } from "./styles";
-import en from "../../localization/en";
 import { logout } from "../../actions/userAction";
 import SearchInput from "../Search/SearchInput/SearchInput";
 import { useState } from "react";
 import AlertDialog from "../AlertDialog";
+import strings from "../../localization";
+import { useNavigate } from "react-router-dom";
+import { path } from "../../helpers/constants";
 
 export default function Navbar() {
   const [alert, setAlert] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const logoutClicked = () => {
     dispatch(logout());
@@ -30,24 +33,26 @@ export default function Navbar() {
             color="inherit"
             aria-label="home"
             sx={style.iconButton}
+            onClick={() => navigate(path.HOME)}
           >
             <ArticleOutlinedIcon fontSize="large" />
           </IconButton>
+
           <SearchInput />
+
           <Box sx={style.commonBox} />
 
-          <CustomButton
-            text={en.logout}
-            color="inherit"
-            onClick={() => setAlert(true)}
-          />
+          <CustomButton color="inherit" onClick={() => setAlert(true)}>
+            {strings.logout}
+          </CustomButton>
+
           <AlertDialog
-            title="Logout"
+            title={strings.logout}
             open={alert}
             setOpen={setAlert}
             onConfirm={logoutClicked}
           >
-            Are you sure that you want to logout?
+            {strings.logoutConfirm}
           </AlertDialog>
         </Toolbar>
       </AppBar>

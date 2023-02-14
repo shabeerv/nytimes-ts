@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../../hooks/useAppDispatch";
 const ErrorAlert = () => {
   const isError = useAppSelector(getLatestError);
   const dispatch = useAppDispatch();
+
   return (
     <>
       {isError && (
@@ -17,7 +18,7 @@ const ErrorAlert = () => {
           }}
         >
           {/*@ts-ignore*/}
-          {isError.message}
+          {isError?.message}
         </Alert>
       )}
     </>

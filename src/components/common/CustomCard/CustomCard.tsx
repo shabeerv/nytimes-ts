@@ -1,16 +1,16 @@
+import { FC, memo } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import Text from "../Text";
 import moment from "moment";
 import Divider from "@mui/material/Divider";
 import CustomButton from "../CustomButton";
 import { styles } from "./styles";
 import Link from "@mui/material/Link";
 import { path } from "../../../helpers/constants";
-import en from "../../../localization/en";
-import { memo } from "react";
+import strings from "../../../localization";
 
 interface ICardProps {
   title: string;
@@ -22,7 +22,7 @@ interface ICardProps {
   index?: number;
 }
 
-const CustomCard: React.FC<ICardProps> = ({
+const CustomCard: FC<ICardProps> = ({
   title,
   byline,
   imageURL,
@@ -41,24 +41,24 @@ const CustomCard: React.FC<ICardProps> = ({
         alt="news-img"
       />
       <CardContent sx={styles.cardContent}>
-        <Typography gutterBottom variant="h6" component="h6">
+        <Text gutterBottom variant="h6">
           {title}
-        </Typography>
+        </Text>
 
-        <Typography color="textSecondary" variant="caption">
-          {byline} - {en.section}: {section} - {en.published_on}:
-          {published_date ? moment(published_date).format("LLL") : "N/A"}
-        </Typography>
+        <Text color="textSecondary" variant="caption">
+          {byline} - {strings.section}: {section} - {strings.published_on}:
+          {published_date
+            ? moment(published_date).format("LLL")
+            : strings.notAvailable}
+        </Text>
 
         <Divider />
-        <Typography variant="body2" component="p">
-          {abstract}
-        </Typography>
+        <Text variant="body2">{abstract}</Text>
       </CardContent>
 
       <CardActions>
         <Link href={`${path.ARTICLEDETAIL}/${index}`} underline="none">
-          <CustomButton size="small" text="View" />
+          <CustomButton size="small">{strings.view}</CustomButton>
         </Link>
       </CardActions>
     </Card>

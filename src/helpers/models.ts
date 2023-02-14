@@ -1,11 +1,14 @@
 export interface INews {
   section: string;
   title: string;
+  subsection: string;
+  updated_date: string;
   abstract: string;
   byline: string;
   published_date: string;
   multimedia: Array<{
     url: string;
+    caption: string;
   }>;
   url: string;
   uri: string;
@@ -15,7 +18,7 @@ export interface ISearchResults {
   [x: string]: any;
   abstract: string;
   byline: {
-    orginal: string;
+    original: string;
   };
   headline: {
     main: string;

@@ -27,7 +27,6 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   actionTypes.REGISTER,
   async ({ email, password }: EmailProps, { rejectWithValue }) => {
-    console.log(email, password);
     try {
       const response = await UserController.register(email, password);
       return response.data;

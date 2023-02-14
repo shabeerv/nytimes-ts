@@ -14,3 +14,5 @@ export enum authTypes {
   login = "login",
   register = "register",
 }
+
+export const historyLimit = 5;

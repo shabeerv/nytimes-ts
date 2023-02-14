@@ -3,15 +3,9 @@ import { topStoriesSelector } from "../../../selectors/newsSelector";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import CustomCard from "../../common/CustomCard";
 import { nytimesLogo } from "../../../helpers/constants";
-// import { useMemo } from "react";
-// import { memo } from "react";
 
 const TopStories = () => {
   const topStories = useAppSelector(topStoriesSelector);
-
-  // const articlesData = useMemo(() => {
-  //   return topStories;
-  // }, [topStories]);
 
   return (
     <Grid container spacing={4}>
