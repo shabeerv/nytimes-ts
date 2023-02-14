@@ -11,9 +11,11 @@ import { nytimesLogo, nytimesURL } from "../../helpers/constants";
 import { useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import { styles } from "./styles";
+import strings from "../../localization";
+import { ISearchResults } from "../../helpers/models";
 
 const Search = () => {
-  const searchResults = useAppSelector(searchResultSelector) as Array<any>;
+  const searchResults = useAppSelector(searchResultSelector);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
 
@@ -21,26 +23,26 @@ const Search = () => {
     <>
       <Stack direction="row" spacing={2} justifyContent="center">
         <CustomButton
-          text="Clear Search"
           variant="contained"
           onClick={() => dispatch(clearSearch())}
-        />
+        >
+          {strings.clearSearch}
+        </CustomButton>
       </Stack>
 
       <Container sx={styles.container} maxWidth="xl">
         <Grid container spacing={4}>
           {searchResults[page - 1]
             ?.filter(
-              //@ts-ignore
-              (searchResult?) =>
+              (searchResult: ISearchResults) =>
                 searchResult?.byline && searchResult?.byline?.original !== ""
             )
-            //@ts-ignore
-            ?.map((searchResult?) => (
+
+            ?.map((searchResult: ISearchResults) => (
               <Grid item key={searchResult?._id} xs={12} sm={6} md={4}>
                 <CustomCard
                   title={searchResult?.headline.main}
-                  byline={searchResult?.byline.orginal}
+                  byline={searchResult?.byline.original}
                   imageURL={
                     searchResult?.multimedia?.length > 0
                       ? `${nytimesURL}${searchResult?.multimedia[0]?.url}`

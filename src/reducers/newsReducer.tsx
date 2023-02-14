@@ -5,6 +5,8 @@ import {
   clearSearch,
   updateSearchHistory,
 } from "../actions/newsAction";
+import { historyLimit } from "../helpers/constants";
+import { sliceIntoChunks } from "../helpers/functions";
 import { INews, ISearchResults } from "../helpers/models";
 
 export interface IInitialState {
@@ -19,42 +21,28 @@ const initialState: IInitialState = {
   searchHistory: [],
 };
 
-export const sliceIntoChunks = (arr: any, chunkSize: any) => {
-  const result = [];
-  for (let i = 0; i < arr.length; i += chunkSize) {
-    const chunk = arr.slice(i, i + chunkSize);
-    result.push(chunk);
-  }
-  return result;
-};
-
 const newsReducer = createReducer(initialState, (builder) => {
-  builder.addCase(getTopStories.fulfilled, (state, action) => {
-    // state.topStories = action.payload.filter((item) => {
-    //   return item.title !== "" && item.abstract !== "";
-    // });
-
-    const filteredStories = action.payload.filter((item) => {
+  builder.addCase(getTopStories.fulfilled, (state, { payload }) => {
+    const filteredStories = payload.filter((item) => {
       return item.title !== "" && item.abstract !== "";
     });
 
     state.topStories = filteredStories;
   });
 
-  builder.addCase(updateSearchHistory, (state, action) => {
-    const historyLimit = 5;
+  builder.addCase(updateSearchHistory, (state, { payload }) => {
     state.searchHistory?.length >= historyLimit && state.searchHistory?.shift();
 
-    if (!state.searchHistory?.includes(action?.payload)) {
-      state.searchHistory?.push(action?.payload);
+    if (!state.searchHistory?.includes(payload)) {
+      state.searchHistory?.push(payload);
     }
   });
 
-  builder.addCase(searchResult.fulfilled, (state, action) => {
-    const tempSearchResults =
-      action.payload?.response?.docs?.length > 6
-        ? sliceIntoChunks(action.payload?.response?.docs, 6)
-        : action.payload?.response?.docs;
+  builder.addCase(searchResult.fulfilled, (state, { payload }) => {
+    const tempSearchResults: ISearchResults[] =
+      payload?.response?.docs?.length > 6
+        ? sliceIntoChunks(payload?.response?.docs, 6)
+        : payload?.response?.docs;
     state.searchResults = tempSearchResults;
   });
 

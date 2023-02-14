@@ -2,7 +2,6 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import en from "../../../localization/en";
 import { styles } from "./styles";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
@@ -11,6 +10,7 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { searchHistorySelector } from "../../../selectors/newsSelector";
 import { useCallback } from "react";
 import { debounce } from "@mui/material";
+import strings from "../../../localization";
 
 export default function SearchInput() {
   const dispatch = useAppDispatch();
@@ -38,16 +38,18 @@ export default function SearchInput() {
         onInputChange={debouncedChangeHandler}
         renderInput={(params) => {
           const { InputLabelProps, InputProps, ...rest } = params;
+
           return (
             <InputBase
               {...rest}
               type="search"
-              placeholder={en.searchPlaceholder}
+              placeholder={strings.searchPlaceholder}
               {...params.InputProps}
             />
           );
         }}
       />
+
       <IconButton type="button" sx={styles.iconButton} aria-label="search">
         <SearchIcon />
       </IconButton>

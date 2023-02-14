@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
+import Text from "../../common/Text";
 import Container from "@mui/material/Container";
 import { FormikProps } from "formik";
 import { styles } from "./styles";
@@ -9,10 +9,10 @@ import ErrorAlert from "./ErrorAlert";
 import CustomButton from "../../common/CustomButton";
 import { Grid } from "@mui/material";
 import { Link } from "@mui/material";
-import en from "../../../localization/en";
 import { reset } from "../../../reducers/errorReducer";
 import { authTypes, path } from "../../../helpers/constants";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import strings from "../../../localization";
 
 interface ILayoutProps {
   title: string;
@@ -21,6 +21,7 @@ interface ILayoutProps {
   // isLogin?: boolean;
   authType: authTypes;
 }
+
 const AuthLayout: React.FC<ILayoutProps> = ({
   title,
   formik,
@@ -30,7 +31,7 @@ const AuthLayout: React.FC<ILayoutProps> = ({
   const dispatch = useAppDispatch();
 
   const button = {
-    text: authType === authTypes.login ? en.signIn : en.signUp,
+    children: authType === authTypes.login ? strings.signIn : strings.signUp,
     fullWidth: true,
     sx: styles.button,
   };
@@ -48,9 +49,7 @@ const AuthLayout: React.FC<ILayoutProps> = ({
           <LockOutlinedIcon />
         </Avatar>
 
-        <Typography component="h1" variant="h5">
-          {title}
-        </Typography>
+        <Text variant="h5">{title}</Text>
 
         <Box
           component="form"
@@ -66,8 +65,8 @@ const AuthLayout: React.FC<ILayoutProps> = ({
           <Grid container justifyContent="center" item>
             <Link {...message} variant="body2">
               {authType === authTypes.login
-                ? en.signupMessage
-                : en.signinMessage}
+                ? strings.signupMessage
+                : strings.signinMessage}
             </Link>
           </Grid>
         </Box>

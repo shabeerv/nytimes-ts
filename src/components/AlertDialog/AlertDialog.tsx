@@ -1,18 +1,19 @@
-import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CustomButton from "../common/CustomButton";
+import strings from "../../localization";
 
 interface IDialogProps {
   title: string;
   children: React.ReactNode;
   open: boolean;
-  setOpen: any;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onConfirm: () => void;
 }
+
 const AlertDialog: React.FC<IDialogProps> = ({
   title,
   children,
@@ -36,15 +37,19 @@ const AlertDialog: React.FC<IDialogProps> = ({
       </DialogContent>
 
       <DialogActions>
-        <CustomButton text="Close" onClick={() => setOpen(false)} />
+        <CustomButton onClick={() => setOpen(false)}>
+          {strings.close}
+        </CustomButton>
+
         <CustomButton
           variant="contained"
-          text="Confirm"
           onClick={() => {
             setOpen(false);
             onConfirm();
           }}
-        />
+        >
+          {strings.confirm}
+        </CustomButton>
       </DialogActions>
     </Dialog>
   );
